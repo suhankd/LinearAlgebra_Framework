@@ -340,3 +340,31 @@ std::ostream& operator<<(std::ostream &COUT, const Matrix &matrixInst)
     return COUT;
 
 }
+
+// Modified "==" functions to allow some tolerance.  
+
+bool Matrix::CloseEnough(float f1, float f2)
+{
+    return fabs(f1 - f2) < 1e-9;
+}
+
+bool Matrix::Compare(Matrix matrix2, double tolerance) {
+
+    if((matrix2.numRows != this->numRows) || (this->numCols != matrix2.numCols)) {throw std::invalid_argument("Cannot compare the matrices as they are of different shape.");}
+
+    double cumSum = 0.0;
+    for(int i = 0; i < this->numRows; i++) {
+
+        for(int j = 0; j < this->numCols; j++) {
+
+            cumSum += pow(this->MatrixData[i][j]-matrix2.MatrixData[i][j],2);
+
+        }
+
+    }
+    cumSum = sqrt(cumSum/((numRows*numCols)-1));
+    
+    if(cumSum < tolerance) return true;
+    else {return false;}
+
+}

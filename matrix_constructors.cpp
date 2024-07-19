@@ -76,9 +76,9 @@ Matrix::Matrix(const Matrix &inputMatrix)
 Matrix::~Matrix()
 {
 
-    if (MatrixData != nullptr)
-    {
+    if (MatrixData != nullptr){
 
         delete[] MatrixData;
+        
     }
 }
