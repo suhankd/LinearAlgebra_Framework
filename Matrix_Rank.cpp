@@ -55,4 +55,6 @@ int Matrix::Rank()
             }
         }
     }
+
+    return 1;
 }
